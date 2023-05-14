@@ -1,0 +1,30 @@
+{
+   "name": "John Doe",
+   "age": 34,
+   "email": "johndoe@example.com",
+   "address": {
+      "street": "123 Main St",
+      "city": "Anytown",
+      "state": "CA",
+      "zip": "1234"
+   },
+   "phone_numbers": [
+      "+1-123-456-7890",
+      "+1-234-567-8901",
+      "+1-345-678-9012"
+   ],
+   "education": [
+      {
+         "degree": "Bachelor of Science",
+         "major": "Computer Science",
+         "university": "University of California, Los Angeles",
+         "year": "2009"
+      },
+      {
+         "degree": "Master of Business Administration",
+         "major": "Finance",
+         "university": "Stanford University",
+         "year": "2013"
+      }
+   ]
+}

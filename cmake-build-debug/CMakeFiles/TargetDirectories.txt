@@ -1,0 +1,3 @@
+/home/jetset/projects/MyJson/cmake-build-debug/CMakeFiles/MyJson.dir
+/home/jetset/projects/MyJson/cmake-build-debug/CMakeFiles/edit_cache.dir
+/home/jetset/projects/MyJson/cmake-build-debug/CMakeFiles/rebuild_cache.dir
