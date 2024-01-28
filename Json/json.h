@@ -52,6 +52,32 @@ public:
 
     operator std::string() const;
 
+    bool is_null() const;
+    bool is_bool() const;
+    bool is_int() const;
+    bool is_double() const;
+    bool is_string() const;
+    bool is_array() const;
+    bool is_object() const;
+    int size() const;
+    // return true if empty array, empty object, or null, otherwise, false.
+    bool empty() const;
+
+private:
+    bool has(int index) const;
+    bool has(const char * key) const;
+    bool has(const std::string & key) const;
+public:
+    Json get(int index) const;
+    Json get(const char * key) const;
+    Json get(const std::string & key) const;
+
+    void remove(int index);
+    void remove(const char * key);
+    void remove(const std::string & key);
+
+
+
     // append value to array at the end.
     void append(const Json &value);
 
