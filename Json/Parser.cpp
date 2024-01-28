@@ -1,4 +1,4 @@
-//
+ //
 // Created by admin on 5/11/2023.
 //
 
@@ -287,7 +287,7 @@ Json Parser::parse_array() {
         c = getChar();//递归处理完  走下一步
         if (c == ']') break;
 
-        if (c != ',') throw std::logic_error("expected , array");
+        if (c != ',') throw std::logic_error("json syntax error  expected , array");
         //skip_whitespace();
     }
     return arr;
@@ -321,7 +321,7 @@ Json Parser::parse_object() {
 }
 
 Parser::~Parser() {
-    //if(m_str != nullptr) //deleting null pointer has no effect
+    //if(m_str != nullptr)  
     delete m_str;
     m_str = nullptr;
 }
