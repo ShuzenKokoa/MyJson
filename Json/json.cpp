@@ -106,7 +106,7 @@ Json::Json( Json&& other){
     swap(other);
 }
 
-/*
+    /*
              *  Json j = "1"
              *  Json j2 = 1  //implicit  隐式转换
              *
@@ -172,6 +172,124 @@ Json::operator std::string() const{
     }
     return *(m_value.m_str);
 }
+
+bool Json::is_null() const{
+    return m_type == json_null;
+}
+bool Json::is_bool() const{
+    return m_type == json_bool;
+}
+bool Json::is_int() const{
+    return m_type == json_int;
+}
+bool Json::is_double() const{
+    return m_type == json_double;
+}
+bool Json::is_string() const{
+    return m_type == json_string;
+}
+bool Json::is_array() const{
+    return m_type == json_array;
+}
+bool Json::is_object() const{
+    return m_type == json_object;
+}
+
+
+int Json::size() const{
+    if(m_type == json_array) return m_value.m_vec->size();
+    if(m_type == json_object){
+        return m_value.m_map->size();
+    }
+    else{
+        return -1;
+    }
+}
+// return true if empty array, empty object, or null, otherwise, false.
+bool Json::empty() const{
+
+    if(m_type == json_array){
+        if(m_value.m_vec == nullptr){
+            return true;
+        }else{
+            return m_value.m_vec->empty();
+        }
+    }
+    if(m_type == json_object){
+        if(m_value.m_map == nullptr){
+            return true;
+        }else{
+            return m_value.m_map->empty();
+        }
+    }
+    return true;
+}
+
+bool Json::has(int index) const{
+
+    if(m_type == json_array){
+        if(index > m_value.m_vec->size()){
+            std::cout<<"index out of bound"<<std::endl;
+            return false;
+        }
+        return index >= 0;
+    }
+    return false;
+}
+bool Json::has(const char * key) const{
+    if(!key) return false;
+    return has(std::string(key));
+}
+bool Json::has(const std::string & key) const{
+    if(m_type == json_object){
+        if(key.empty()) return false;
+        return m_value.m_map->find(key) != m_value.m_map->end();
+    }
+    return false;
+}
+
+Json Json::get(int index) const{
+    if(has(index)){
+        return Json();//返回空
+    }
+    return (*(m_value.m_vec))[index];
+}
+Json Json::get(const char * key) const{
+    if(key == nullptr || !has(key)){
+        std::cout<<"no key"<<std::endl;
+        return Json();
+    }
+    return get(std::string(key));
+}
+Json Json::get(const std::string & key) const{
+    if(!has(key)){
+        return Json();
+    }
+    return (*m_value.m_map)[key];
+}
+
+void Json::remove(int index){
+    if(!has(index)) return ;
+
+    auto i = (*m_value.m_vec);
+    i[index].clear();
+    i.erase(i.begin()+index);
+}
+void Json::remove(const char * key){
+    if(!has(key)) return;
+    remove(std::string(key));
+}
+void Json::remove(const std::string & key){
+    if(!has(key) || m_type != json_object){
+        return ;
+    }
+    auto i = (*m_value.m_map).find(key);
+    if(i != (*m_value.m_map).end()){
+        i->second.clear();
+        (m_value.m_map)->erase(i);
+    }
+}
+
 
 void Json::clear() {
     switch (m_type) {
@@ -456,8 +574,3 @@ void Json::parse(const std::string &str) {
 Json::~Json() {
     clear();
 }
-
-
-
-
-
