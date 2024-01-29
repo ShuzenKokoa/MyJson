@@ -1,8 +1,3 @@
- //
-// Created by admin on 5/11/2023.
-//
-
-
 #include "Parser.h"
 void Parser::parameter_checker() {
     if (m_str == nullptr) {
