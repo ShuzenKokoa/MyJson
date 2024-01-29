@@ -1,7 +1,3 @@
-//
-// Created by admin on 5/11/2023.
-//
-
 #ifndef MYJSON_PARSER_H
 #define MYJSON_PARSER_H
 
