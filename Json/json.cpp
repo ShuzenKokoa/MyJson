@@ -343,7 +343,7 @@ void Json::append(Json &&value) {
         m_type = json_array;
         m_value.m_vec = new std::vector<Json>();
     }
-    (m_value.m_vec)->push_back(std::move(value));// 把右值转左值
+    (m_value.m_vec)->push_back(std::move(value));
 }
 
 std::string Json::str() const {
